@@ -13,6 +13,12 @@ local module = {
     name = "espeak",
 }
 
+settings.define("espeak.volume", {
+    description: "The volume for ESpeak TTS",
+    default: 100,
+    type: "number"
+})
+
 local username
 local function speak(message)
     local url = "https://music.madefor.cc/tts?text=" .. textutils.urlEncode(message)
@@ -27,7 +33,7 @@ local function speak(message)
         if not chunk then break end
 
         local buffer = decoder(chunk)
-        while not speaker.playAudio(buffer) do
+        while not speaker.playAudio(buffer, settings.get("espeak.volume")) do
             os.pullEvent("speaker_audio_empty")
         end
     end
