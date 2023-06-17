@@ -3,7 +3,7 @@ Modular neural interface init system for ComputerCraft
 
 ## Installation
 
-Run in shell `wget run https://raw.github.com/Ale32bit-CC/Minit/main/installer.lua`
+Run in shell `wget run https://raw.github.com/Ale32bit/Minit/main/installer.lua`
 
 ## Requirements
 

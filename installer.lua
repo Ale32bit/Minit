@@ -3,7 +3,7 @@
 -- This software is licensed under the MIT license.
 
 local remote = "https://raw.githubusercontent.com"
-local repository = "Ale32bit-CC/Minit"
+local repository = "Ale32bit/Minit"
 local branch = "main"
 
 local files = {
@@ -32,7 +32,7 @@ end
 
 print("Minit installer")
 print("This software is licensed under the MIT license.")
-print("https://github.com/Ale32bit-CC/Minit/blob/main/LICENSE")
+print("https://github.com/Ale32bit/Minit/blob/main/LICENSE")
 print("Continue? [Y/n]")
 local input = read()
 if input:lower() ~= "y" and input:lower() ~= "" then
