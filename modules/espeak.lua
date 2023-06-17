@@ -14,9 +14,9 @@ local module = {
 }
 
 settings.define("espeak.volume", {
-    description: "The volume for ESpeak TTS",
-    default: 100,
-    type: "number"
+    description = "The volume for ESpeak TTS",
+    default = 100,
+    type = "number"
 })
 
 local username
