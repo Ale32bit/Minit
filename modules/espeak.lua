@@ -2,6 +2,9 @@
 -- Copyright (C) 2023 AlexDevs
 -- This software is licensed under the MIT license.
 
+-- This code is based on CCSpeaks by SquidDev
+-- https://github.com/SquidDev-CC/CCSpeaks
+
 -- This module is made for SwitchCraft 3
 -- A Chatbox license is required to use this module
 -- Or use "guest" license
