@@ -65,6 +65,12 @@ settings.define("elytra.softfall.basepower", {
     default = 0.75,
 })
 
+settings.define("elytra.softfall.trigger", {
+    description = "Minimum negative Y motion required to trigger soft fall. USE NEGATIVE NUMBERS",
+    type = "number",
+    default = -1,
+})
+
 local neural, speaker
 local canvas, container
 local screen = {}
@@ -195,7 +201,7 @@ function module.update(meta)
             return
         end
 
-        if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
+        if meta.deltaPosY < settings.get("elytra.softfall.trigger") and settings.get("elytra.softfall.enable") then
             softFall(meta.motionY)
             setIcon(icons.slow)
             return
@@ -220,7 +226,7 @@ function module.update(meta)
         if meta.isSneaking then
             propel(meta, icons.propelling)
         else
-            if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
+            if meta.deltaPosY < settings.get("elytra.softfall.trigger") and settings.get("elytra.softfall.enable") then
                 softFall(meta.motionY)
                 setIcon(icons.slow)
             else
@@ -229,7 +235,7 @@ function module.update(meta)
         end
     else
         if pitch > settings.get("elytra.pitch") then
-            if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
+            if meta.deltaPosY < settings.get("elytra.softfall.trigger") and settings.get("elytra.softfall.enable") then
                 softFall(meta.motionY)
                 setIcon(icons.slow)
             end
