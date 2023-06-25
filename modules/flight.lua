@@ -30,7 +30,7 @@ settings.define("elytra.power", {
 })
 
 settings.define("elytra.pitch", {
-    description = "Propeller pitch treshold",
+    description = "Propeller pitch treshold for automatic mode",
     type = "number",
     default = 0,
 })
@@ -48,9 +48,21 @@ settings.define("elytra.sounds", {
 })
 
 settings.define("elytra.manual", {
-    description = "Invert the SHIFT function to propel on press",
+    description = "Press SHIFT while flying to propel",
     type = "boolean",
-    default = false,
+    default = true,
+})
+
+settings.define("elytra.softfall.enable", {
+    description = "Enable softfall",
+    type = "boolean",
+    default = true,
+})
+
+settings.define("elytra.softfall.basepower", {
+    description = "Base power for soft fall",
+    type = "number",
+    default = 0.75,
 })
 
 local neural, speaker
@@ -132,7 +144,7 @@ end
 
 local function softFall(motionY)
     motionY = motionY or 0
-    launchUp(-motionY + 0.75)
+    launchUp(-motionY + settings.get("elytra.softfall.basepower"))
     playSound("minecraft:entity.phantom.flap", 1, 1)
 end
 
@@ -183,7 +195,7 @@ function module.update(meta)
             return
         end
 
-        if meta.deltaPosY < -1 then
+        if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
             softFall(meta.motionY)
             setIcon(icons.slow)
             return
@@ -208,7 +220,7 @@ function module.update(meta)
         if meta.isSneaking then
             propel(meta, icons.propelling)
         else
-            if meta.deltaPosY < -1 then
+            if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
                 softFall(meta.motionY)
                 setIcon(icons.slow)
             else
@@ -217,7 +229,7 @@ function module.update(meta)
         end
     else
         if pitch > settings.get("elytra.pitch") then
-            if meta.deltaPosY < -1 then
+            if meta.deltaPosY < -1 and settings.get("elytra.softfall.enable") then
                 softFall(meta.motionY)
                 setIcon(icons.slow)
             end
