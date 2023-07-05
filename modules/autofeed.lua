@@ -58,7 +58,7 @@ function module.setup(ni)
 end
 
 function module.update(meta)
-    if meta.food.saturation < saturation then
+    if meta.food.hungry or meta.food.saturation < saturation then
         feed()
     end
 end
