@@ -71,6 +71,12 @@ settings.define("elytra.softfall.trigger", {
     default = -1,
 })
 
+settings.define("elytra.glasses.enable", {
+    description = "Enable the use of glasses.",
+    type = "boolean",
+    default = true,
+})
+
 local neural, speaker
 local canvas, container
 local screen = {}
@@ -83,7 +89,14 @@ local function getRoseWind(degrees)
     return directions[index + 1]
 end
 
+local function canUseScreen() 
+    return settings.get("elytra.glasses.enable") and neural.hasModule("plethora:glasses")
+end
+
 local function createScreen()
+    if not canUseScreen() then
+        return
+    end
     canvas = neural.canvas()
     screen = {}
 
@@ -108,6 +121,9 @@ local function createScreen()
 end
 
 local function updateScreen(meta)
+    if not canUseScreen() then
+        return
+    end
     if not canvas or not container then
         createScreen()
     end
@@ -121,6 +137,9 @@ end
 
 local icon = icons.empty
 local function toggleScreen(show)
+    if not canUseScreen() then
+        return
+    end
     local alpha = show and 0xff or 0
     screen.icon.setItem(show and icon or icons.empty)
     screen.speed.setAlpha(alpha)
@@ -129,6 +148,9 @@ local function toggleScreen(show)
 end
 
 local function setIcon(newIcon)
+    if not canUseScreen() then
+        return
+    end
     icon = newIcon
     screen.icon.setItem(newIcon)
 end
