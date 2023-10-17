@@ -19,9 +19,17 @@ settings.define("espeak.volume", {
     type = "number"
 })
 
+settings.define("espeak.voice", {
+    description = "The voice for ESpeak TTS",
+    default = "en",
+    type = "string"
+})
+
 local username
 local function speak(message)
-    local url = "https://music.madefor.cc/tts?text=" .. textutils.urlEncode(message)
+    local url = "https://music.madefor.cc/tts" 
+        .. "?text=" .. textutils.urlEncode(message)
+        .. "&voice=" .. textutils.urlEncode(settings.get("espeak.voice"))
     local response, err = http.get { url = url, binary = true }
     if not response then error(err, 0) end
 
