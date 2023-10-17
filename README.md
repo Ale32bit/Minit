@@ -15,7 +15,7 @@ This software must be installed in a neural interface from the Plethora mod for 
 
 **Elytra flight module**:
 - Kinetic augment
-- Overlay glasses
+- Overlay glasses (Optional)
 - Introspection module
 - Entity sensor
 
